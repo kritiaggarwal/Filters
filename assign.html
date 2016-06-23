@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Assign 1
+	</title> 
+	<!-- 
+	1) Make all the values in the scope to be CAPITAL using uppercase Filters
+	2) Reduce the number 4.557693 to 2 decimal places using Number Filter.
+	3) Create an array of strings and sort it using the OrderBy Filter.	-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+	<script type="text/javascript">
+		var mod=angular.module("myap",[]);
+		mod.controller("con",function($scope){
+			$scope.name="Kriti Aggarwal";
+			$scope.num = 4.557693;
+			var some=function(){
+				alert("hello");
+			}
+			$scope.cars = ["Kriti", "Priti", "Sukriti", "Neha", "Shruti", "Sonalisa","ABC"];
+		});
+	</script>
+</head>
+<body>
+
+	<div ng-app="myap" ng-controller="con">
+		<p>The name is {{ name | uppercase }}</p><br>
+		<p>The number is {{ num | number : 2 }}</p><br>
+		<p> The array before sorting is : </p>
+		<ul>
+			<li ng-repeat="x in cars "> {{x}} </li>
+		</ul>
+		<p> The array after sorting is : </p>
+		<ul>
+			<li ng-repeat="x in cars | orderBy"> {{x}} </li>
+		</ul>
+
+	</div>
+
+</body>
+</html>
