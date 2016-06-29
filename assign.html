@@ -8,6 +8,16 @@
 	1) Make all the values in the scope to be CAPITAL using uppercase Filters
 	2) Reduce the number 4.557693 to 2 decimal places using Number Filter.
 	3) Create an array of strings and sort it using the OrderBy Filter.	-->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
 	<script type="text/javascript">
@@ -18,23 +28,69 @@
 			var some=function(){
 				alert("hello");
 			}
-			$scope.cars = ["Kriti", "Priti", "Sukriti", "Neha", "Shruti", "Sonalisa","ABC"];
+			$scope.person = [
+				 	{firstName: 'Kriti', lastName: 'Aggarwal'},
+		            {firstName: 'Sukriti', lastName: 'Kakkar'},
+		            {firstName: 'Preeti', lastName: 'Singh'},
+		            {firstName: 'Sonalisa', lastName: 'Patel'},
+		            {firstName: 'Neha', lastName: 'Mishra'},
+		            {firstName: 'Shruti', lastName: 'Chauhan'}
+			];
+			$scope.sortType     = 'name'; 
+ 			$scope.sortReverse  = false;
 		});
 	</script>
 </head>
-<body>
+<body ng-app="myap">
 
-	<div ng-app="myap" ng-controller="con">
-		<p>The name is {{ name | uppercase }}</p><br>
-		<p>The number is {{ num | number : 2 }}</p><br>
-		<p> The array before sorting is : </p>
-		<ul>
-			<li ng-repeat="x in cars "> {{x}} </li>
-		</ul>
-		<p> The array after sorting is : </p>
-		<ul>
-			<li ng-repeat="x in cars | orderBy"> {{x}} </li>
-		</ul>
+	<div ng-controller="con">
+			
+		<div class="container-fluid">
+			<h3> UPPERCASE FILTER </h3> <br> 
+			The name is {{ name }} <br>
+			The name(with filter) is {{ name | uppercase }}</p><br>  <!-- Uppercase Filter -->
+			<h3> NUMBER FILTER </h3> <br>
+			The number is {{ num }} <br>
+			The number(with filter) is {{ num | number : 2 }}<br>  <!-- Number Filter -->
+
+			<!-- Order By Filter Demo -->
+			<h3> ORDER BY FILTER </h3> <br>
+		  <div class="alert alert-info">
+		    Sort Type: {{ sortType }} <br> <!-- Defining Sort Type -->
+		    Sort Reverse: {{ sortReverse }} <br> <!-- For Ascending/Descending -->
+		    [NOTE : Click on table heading to order by that element] <br>
+		  </div>
+
+		   <table class="table table-bordered table-striped">
+    	
+   		   <thead>
+		      <tr class="success">
+		        <td>
+		          <a href="#" ng-click="sortType = 'First_Name'; sortReverse = !sortReverse">
+		            First Name 
+		            <span ng-show="sortType == 'First_Name' && !sortReverse" class="fa fa-caret-down"></span>
+		            <span ng-show="sortType == 'First_Name' && sortReverse" class="fa fa-caret-up"></span>
+		          </a>
+		        </td>
+		        <td>
+		          <a href="#" ng-click="sortType = 'Last_Name'; sortReverse = !sortReverse">
+		           Last Name 
+		            <span ng-show="sortType == 'Last_Name' && !sortReverse" class="fa fa-caret-down"></span>
+		            <span ng-show="sortType == 'Last_Name' && sortReverse" class="fa fa-caret-up"></span>
+		          </a>
+		        </td>
+		       </tr>
+		    </thead>
+		    
+		    <tbody>
+		      <tr ng-repeat="roll in person | orderBy:sortType:sortReverse ">
+		        <td>{{ roll.firstName }}</td>
+		        <td>{{ roll.lastName }}</td>
+		       </tr>
+		    </tbody>
+    
+ 		</table>
+ 		</div>
 
 	</div>
 
